@@ -1,7 +1,1 @@
-# Python - Import & Modules
-
-This project covers:
-- How to create and import modules
-- How to use functions from another file
-- Using `__name__ == "__main__"` to control execution
-- Using command line arguments with Python
+# Python - Import & Modules\n\nBasics of importing and using modules in Python.\n\n- Using functions from another file\n- Using command line arguments\n- Creating and importing modules
