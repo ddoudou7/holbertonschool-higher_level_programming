@@ -1,3 +1,6 @@
-# Python - Import & Modules
+# Python - More Data Structures: Set, Dictionary
 
-This directory contains solutions for Python import and modules tasks.
+This project covers:
+- Sets
+- Dictionaries
+- Lambda, map, filter, reduce
