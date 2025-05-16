@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 def text_indentation(text):
-    """Print a text with two new lines after each '.', '?', or ':' character."""
+    """
+    Print a text with two new lines after each '.', '?' or ':' character.
+    """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
