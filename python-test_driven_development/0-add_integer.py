@@ -2,24 +2,24 @@
 """
 This is the "0-add_integer" module.
 
-The 0-add_integer module supplies one function, add_integer().
-It adds two integers or floats, returning an integer.
+This module provides a function add_integer(a, b=98) that adds
+two numbers and returns the result as an integer.
 """
 
 
 def add_integer(a, b=98):
     """
-    Adds two integers or floats, casts to int if needed.
+    Adds two integers or floats, cast to integers.
 
     Args:
-        a: first number
-        b: second number, default is 98
+        a: The first number.
+        b: The second number (default is 98).
 
     Returns:
-        int: the sum of a and b
+        The sum of a and b as an integer.
 
     Raises:
-        TypeError: if a or b are not int or float
+        TypeError: If a or b is not an int or float.
 
     Example:
     >>> add_integer(2, 3)
