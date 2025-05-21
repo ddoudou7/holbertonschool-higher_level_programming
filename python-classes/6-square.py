@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""This module defines a Square class with position for printing."""
+"""This module defines a Square class with size and position printing."""
 
 
 class Square:
     """A class that defines a square by size and position."""
 
     def __init__(self, size=0, position=(0, 0)):
-        """Initialize a new Square with size and position."""
+        """Initialize a new Square instance with size and position."""
         self.size = size
         self.position = position
 
@@ -39,14 +39,17 @@ class Square:
         self.__position = value
 
     def area(self):
-        """Return the area."""
+        """Return the area of the square."""
         return self.__size ** 2
 
     def my_print(self):
-        """Print the square with position offset using #."""
+        """Print the square with the character #, considering position."""
         if self.__size == 0:
             print()
             return
-        print("\n" * self.__position[1], end="")
+
+        for _ in range(self.__position[1]):
+            print()
+
         for _ in range(self.__size):
             print(" " * self.__position[0] + "#" * self.__size)
