@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """Defines Rectangle with square class method."""
 
+
 class Rectangle:
+    """A class that defines a rectangle."""
     number_of_instances = 0
     print_symbol = "#"
 
@@ -41,14 +43,13 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
-
     def __str__(self):
         if self.__width == 0 or self.__height == 0:
             return ""
-        return "\\n".join([str(self.print_symbol) * self.__width for _ in range(self.__height)])
+        return "\n".join([str(self.print_symbol) * self.__width for _ in range(self.__height)])
 
     def __repr__(self):
-        return "Rectangle({}, {})".format(self.__width, self.__height)
+        return f"Rectangle({self.__width}, {self.__height})"
 
     def __del__(self):
         print("Bye rectangle...")
@@ -67,3 +68,4 @@ class Rectangle:
     @classmethod
     def square(cls, size=0):
         return cls(size, size)
+
