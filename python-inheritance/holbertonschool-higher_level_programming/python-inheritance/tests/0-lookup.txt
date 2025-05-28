@@ -1,0 +1,13 @@
+>>> from lookup import lookup
+>>> class Dummy:
+...     def __init__(self):
+...         self.name = "Philips"
+...     def greet(self):
+...         return "Hello!"
+>>> "greet" in lookup(Dummy())
+True
+>>> "name" in lookup(Dummy())
+True
+>>> "__str__" in lookup(Dummy())
+True
+
