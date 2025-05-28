@@ -1,7 +1,9 @@
-# Python - More Data Structures: Set, Dictionary
+# Python - Inheritance
 
-This project is part of the Holberton School curriculum.
-It covers:
-- Sets
-- Dictionaries
-- Lambda, map, filter, reduce
+This project covers:
+- Understanding `isinstance()` and `issubclass()`
+- Creating classes with inheritance
+- Overriding methods
+- Using `super()`
+- Private vs public attributes
+- Abstract base classes
