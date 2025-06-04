@@ -6,10 +6,7 @@ my_list = from_json_string(s_my_list)
 print(my_list)
 print(type(my_list))
 
-s_my_dict = """
-{"is_active": true, "info": {"age": 36, "average": 3.14},
-"id": 12, "name": "John", "places": ["San Francisco", "Tokyo"]}
-"""
+s_my_dict = "{\"is_active\": true, \"info\": {\"age\": 36, \"average\": 3.14}, \"id\": 12, \"name\": \"John\", \"places\": [\"San Francisco\", \"Tokyo\"]}"
 my_dict = from_json_string(s_my_dict)
 print(my_dict)
 print(type(my_dict))
