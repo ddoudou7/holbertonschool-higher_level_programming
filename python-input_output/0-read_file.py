@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """
-0-read_file.py
+This module provides a function to read and
+print the contents of a UTF-8 text file.
 """
 
 def read_file(filename=""):
     """
-    Lit un fichier texte (UTF-8) et affiche son contenu sur stdout.
+    Reads a text file (UTF8) and prints its content to stdout.
 
     Args:
-        filename (str): Chemin vers le fichier à lire.
+        filename (str): The name of the file to read.
     """
-    with open(filename, 'r', encoding='utf-8') as f:
+    with open(filename, encoding="utf-8") as f:
         print(f.read(), end="")
