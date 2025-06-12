@@ -6,13 +6,13 @@ URL = "https://jsonplaceholder.typicode.com/posts"
 def fetch_and_print_posts() -> None:
     resp = requests.get(URL, timeout=10)
     print(f"Status Code: {resp.status_code}")
-    if resp.ok:
+    if resp.status_code == 200:
         for post in resp.json():
             print(post["title"])
 
 def fetch_and_save_posts(csv_file: str = "posts.csv") -> None:
     resp = requests.get(URL, timeout=10)
-    if not resp.ok:
+    if not resp.status_code == 200:
         print(f"Request failed ({resp.status_code})")
         return
     posts = [{"id": p["id"], "title": p["title"], "body": p["body"]} for p in resp.json()]
