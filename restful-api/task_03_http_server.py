@@ -4,6 +4,14 @@ import json, http.server, socketserver
 PORT = 8000
 
 class Handler(http.server.BaseHTTPRequestHandler):
+    def _send_text(self, txt: str, status=200):
+        body = txt.encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "text/plain")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def _send_json(self, data, status=200):
         body = json.dumps(data).encode()
         self.send_response(status)
@@ -20,11 +28,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
             payload = {"name": "John", "age": 30, "city": "New York"}
             self._send_json(payload)
         elif self.path == "/status":
-            self._send_json({"status": "OK"})
+            self._send_text("OK")
         elif self.path == "/info":
             self._send_json({"version": "1.0", "description": "A simple API built with http.server"})
         else:
-            self._send_json({"error": "Endpoint not found"}, status=404)
+            self._send_text("Endpoint not found", status=404)
 
 if __name__ == "__main__":
     with socketserver.TCPServer(("", PORT), Handler) as httpd:
