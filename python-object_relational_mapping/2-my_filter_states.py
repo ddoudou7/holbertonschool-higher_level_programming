@@ -11,12 +11,8 @@ Example:
 import sys
 import MySQLdb
 
-
 def main():
-    """
-    Connects to MySQL on localhost:3306 using provided credentials,
-    queries the states whose name matches the user input, and prints each row.
-    """
+    """Connect to MySQL, query by exact name match, print each row."""
     if len(sys.argv) != 5:
         return
     db = MySQLdb.connect(
@@ -33,7 +29,6 @@ def main():
         print(row)
     cur.close()
     db.close()
-
 
 if __name__ == "__main__":
     main()
