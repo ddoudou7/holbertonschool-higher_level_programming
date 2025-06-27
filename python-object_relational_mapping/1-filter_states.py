@@ -13,8 +13,12 @@ Example:
 import sys
 import MySQLdb
 
+
 def main():
-    # Connexion à MySQL sur localhost:3306 avec les args
+    """
+    Connects to MySQL on localhost:3306 using provided credentials,
+    queries the states whose name starts with 'N', and prints each row.
+    """
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -23,12 +27,12 @@ def main():
         db=sys.argv[3]
     )
     cur = db.cursor()
-    # On ne charge que les états commençant par 'N'
     cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
     for row in cur.fetchall():
         print(row)
     cur.close()
     db.close()
+
 
 if __name__ == "__main__":
     main()
