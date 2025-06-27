@@ -24,18 +24,17 @@ def main():
         charset="utf8"
     )
     cur = conn.cursor()
-    query = (
-        "SELECT cities.name "
-        "FROM cities "
-        "JOIN states ON cities.state_id = states.id "
-        "WHERE states.name = %s "
-        "ORDER BY cities.id ASC"
+    cur.execute(
+        "SELECT c.name "
+        "FROM cities c "
+        "JOIN states s ON c.state_id = s.id "
+        "WHERE s.name = %s "
+        "ORDER BY c.id ASC",
+        (state,)
     )
-    cur.execute(query, (state,))
     rows = cur.fetchall()
     if rows:
-        # join des noms par ", "
-        print(", ".join([r[0] for r in rows]))
+        print(", ".join(r[0] for r in rows))
     cur.close()
     conn.close()
 
