@@ -13,7 +13,6 @@ import MySQLdb
 
 
 def main():
-    """Connects to MySQL, queries all states, prints each row."""
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
