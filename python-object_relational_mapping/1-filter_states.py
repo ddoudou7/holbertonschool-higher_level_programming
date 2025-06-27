@@ -1,13 +1,21 @@
 #!/usr/bin/python3
 """
-Lists all State rows whose name starts with 'N' from the database hbtn_0e_0_usa.
-Usage: ./1-filter_states.py <mysql_user> <mysql_pwd> <db_name>
+Lists all State rows where name starts with 'N' from DB hbtn_0e_0_usa.
+
+Usage:
+    ./1-filter_states.py <mysql_user> <mysql_pwd> <db_name>
+
+Example:
+    ./1-filter_states.py root root hbtn_0e_0_usa
+    (4, 'New York')
+    (5, 'Nevada')
 """
-import MySQLdb
 import sys
+import MySQLdb
 
 
-if __name__ == "__main__":
+def main():
+    """Connects to MySQL, queries states where name LIKE 'N%', prints each row."""
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -16,10 +24,12 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
     cur = db.cursor()
-    cur.execute("SELECT * FROM states "
-                "WHERE name LIKE BINARY 'N%' "
-                "ORDER BY id ASC")
+    cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
     for row in cur.fetchall():
         print(row)
     cur.close()
     db.close()
+
+
+if __name__ == "__main__":
+    main()
