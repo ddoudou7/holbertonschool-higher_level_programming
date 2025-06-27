@@ -1,18 +1,28 @@
 #!/usr/bin/python3
-"""Lists all State objects from the database hbtn_0e_6_usa."""
+"""
+Lists all State objects from the database hbtn_0e_6_usa.
 
+Usage:
+    ./7-model_state_fetch_all.py <mysql_user> <mysql_pwd> <db_name>
+
+Output example:
+    1: California
+    2: Arizona
+    …
+"""
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from model_state import Base, State      # file provided by Holberton
+from model_state import Base, State          # <- import exigé
 
 if __name__ == "__main__":
     engine = create_engine(
         "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-            sys.argv[1], sys.argv[2], sys.argv[3]
-        ),
+            sys.argv[1], sys.argv[2], sys.argv[3]),
         pool_pre_ping=True
     )
+
+    # Pas strictement nécessaire ici, mais bonne pratique
     Base.metadata.create_all(engine)
 
     with Session(engine) as session:
