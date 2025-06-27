@@ -1,12 +1,19 @@
 #!/usr/bin/python3
 """
-Lists all states from the database hbtn_0e_0_usa.
-Usage: ./0-select_states.py <mysql_user> <mysql_pwd> <db_name>
-"""
-import MySQLdb
-import sys
+Lists all rows of table `states` from DB hbtn_0e_0_usa (ordered by id ASC).
 
-if __name__ == "__main__":
+Usage:
+    ./0-select_states.py <mysql_user> <mysql_pwd> <db_name>
+Example output:
+    (1, 'California')
+    (2, 'Arizona')
+"""
+import sys
+import MySQLdb
+
+
+def main():
+    """Connects to MySQL, queries all states, prints each row."""
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -20,3 +27,7 @@ if __name__ == "__main__":
         print(row)
     cur.close()
     db.close()
+
+
+if __name__ == "__main__":
+    main()
