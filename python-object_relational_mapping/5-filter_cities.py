@@ -34,6 +34,7 @@ def main():
     cur.execute(query, (state,))
     rows = cur.fetchall()
     if rows:
+        # join des noms par ", "
         print(", ".join([r[0] for r in rows]))
     cur.close()
     conn.close()
