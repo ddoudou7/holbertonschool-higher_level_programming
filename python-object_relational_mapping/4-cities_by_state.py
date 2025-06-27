@@ -1,14 +1,20 @@
 #!/usr/bin/python3
 """
-Lists all cities of hbtn_0e_4_usa in ascending order by cities.id.
-Output format : (id, city_name, state_name)
-Usage: ./4-cities_by_state.py <mysql_user> <mysql_pwd> <db_name>
+Lists all cities from the database hbtn_0e_4_usa.
+
+Usage:
+    ./4-cities_by_state.py <mysql_user> <mysql_pwd> <db_name>
+Example:
+    ./4-cities_by_state.py root root hbtn_0e_4_usa
+    (1, 'San Francisco', 'California')
+    ...
 """
-import MySQLdb
 import sys
+import MySQLdb
 
-
-if __name__ == "__main__":
+def main():
+    if len(sys.argv) != 4:
+        sys.exit(1)
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -17,15 +23,16 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
     cur = db.cursor()
-
-    # ► une seule execute()      ↓↓↓ jointure + tri
-    cur.execute("""SELECT cities.id, cities.name, states.name
-                   FROM cities
-                   JOIN states ON cities.state_id = states.id
-                   ORDER BY cities.id ASC""")
-
+    cur.execute(
+        "SELECT cities.id, cities.name, states.name "
+        "FROM cities "
+        "JOIN states ON cities.state_id = states.id "
+        "ORDER BY cities.id ASC"
+    )
     for row in cur.fetchall():
         print(row)
-
     cur.close()
     db.close()
+
+if __name__ == "__main__":
+    main()
