@@ -12,9 +12,12 @@ Example:
 """
 import sys
 import MySQLdb
+ 
 
 
 def main():
+    if len(sys.argv) != 4:
+        sys.exit(1)
     """
     Connects to MySQL on localhost:3306 using provided credentials,
     queries the states whose name starts with 'N', and prints each row.
