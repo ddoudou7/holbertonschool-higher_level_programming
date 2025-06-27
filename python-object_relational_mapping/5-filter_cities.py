@@ -1,35 +1,41 @@
 #!/usr/bin/python3
 """
-Lists all city names of the state passed as argv[4] (safe from SQL injection).
+Lists all cities of a given state from the database hbtn_0e_4_usa.
 
 Usage:
     ./5-filter_cities.py <mysql_user> <mysql_pwd> <db_name> <state_name>
 
-Output example (for Texas):
+Example:
+    $ ./5-filter_cities.py root root hbtn_0e_4_usa Texas
     Dallas, Houston, Austin
 """
-import MySQLdb
 import sys
+import MySQLdb
 
-
-if __name__ == "__main__":
+def main():
+    """Connects to MySQL and prints cities of the given state."""
+    if len(sys.argv) != 5:
+        sys.exit(1)
+    user, pwd, db_name, state = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+        user=user,
+        passwd=pwd,
+        db=db_name
     )
     cur = db.cursor()
-
-    # ► Une seule execute() avec paramètre → protège contre l’injection
-    cur.execute("""SELECT cities.name FROM cities
-                   JOIN states ON cities.state_id = states.id
-                   WHERE states.name = %s
-                   ORDER BY cities.id ASC""", (sys.argv[4],))
-
-    cities = [row[0] for row in cur.fetchall()]
-    print(", ".join(cities))
-
+    sql = ("SELECT cities.name "
+           "FROM cities "
+           "JOIN states ON cities.state_id = states.id "
+           "WHERE states.name = %s "
+           "ORDER BY cities.id ASC")
+    cur.execute(sql, (state,))
+    rows = cur.fetchall()
+    if rows:
+        print(", ".join(r[0] for r in rows))
     cur.close()
     db.close()
+
+if __name__ == "__main__":
+    main()
