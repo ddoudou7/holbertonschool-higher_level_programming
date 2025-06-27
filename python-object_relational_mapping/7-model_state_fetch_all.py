@@ -1,30 +1,29 @@
 #!/usr/bin/python3
 """
 Lists all State objects from the database hbtn_0e_6_usa.
-
-Usage:
-    ./7-model_state_fetch_all.py <mysql_user> <mysql_pwd> <db_name>
-
-Output example:
-    1: California
-    2: Arizona
-    …
 """
 import sys
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from model_state import Base, State          # <- import exigé
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
-if __name__ == "__main__":
+def main():
+    if len(sys.argv) != 4:
+        sys.exit(1)
+
+    user, pwd, db = sys.argv[1], sys.argv[2], sys.argv[3]
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-            sys.argv[1], sys.argv[2], sys.argv[3]),
+        'mysql+mysqldb://{}:{}@localhost:3306/{}'
+        .format(user, pwd, db),
         pool_pre_ping=True
     )
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    # Pas strictement nécessaire ici, mais bonne pratique
-    Base.metadata.create_all(engine)
+    for state in session.query(State).order_by(State.id):
+        print(f"{state.id}: {state.name}")
 
-    with Session(engine) as session:
-        for state in session.query(State).order_by(State.id):
-            print("{}: {}".format(state.id, state.name))
+    session.close()
+
+if __name__ == "__main__":
+    main()
