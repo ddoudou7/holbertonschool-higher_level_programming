@@ -1,26 +1,34 @@
 #!/usr/bin/python3
 """
-Adds a new State object called 'Louisiana' to the DB hbtn_0e_6_usa
-and prints its generated id.
-
+Adds the State object “Louisiana” to the database hbtn_0e_6_usa
+and prints the new state's id.
 Usage:
     ./11-model_state_insert.py <mysql_user> <mysql_pwd> <db_name>
 """
 import sys
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
-if __name__ == "__main__":
+def main():
+    if len(sys.argv) != 4:
+        sys.exit(1)
+
+    user, pwd, db = sys.argv[1], sys.argv[2], sys.argv[3]
     engine = create_engine(
-        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
-            sys.argv[1], sys.argv[2], sys.argv[3]),
+        f'mysql+mysqldb://{user}:{pwd}@localhost:3306/{db}',
         pool_pre_ping=True
     )
-    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    with Session(engine) as session:
-        new_state = State(name="Louisiana")
-        session.add(new_state)
-        session.commit()
-        print(new_state.id)
+    # Ajout de Louisiana
+    new_state = State(name="Louisiana")
+    session.add(new_state)
+    session.commit()
+    print(new_state.id)
+
+    session.close()
+
+if __name__ == "__main__":
+    main()
