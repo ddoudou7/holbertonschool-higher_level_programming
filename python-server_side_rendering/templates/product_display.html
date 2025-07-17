@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ product.name or product["name"] }}</td>
                 <td>{{ product.category or product["category"] }}</td>
-                <td>${{ "%.2f"|format(product.price or product["price"]) }}</td>
+                <td>${{ "%.2f"|format((product.price|float) if product.price is defined else (product["price"]|float)) }}</td>
             </tr>
             {% endfor %}
         </table>
