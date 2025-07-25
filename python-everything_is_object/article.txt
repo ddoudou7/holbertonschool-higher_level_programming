@@ -1,0 +1,43 @@
+## 🔍 Introduction
+
+In Python, everything is indeed an object. Every variable you create is a reference to an object in memory. This simple but powerful idea affects how variables behave when passed to functions or mutated.
+
+## 🆔 id() and type()
+
+Python provides two essential built-in functions:
+
+- `id()` → returns the **memory address (identity)** of an object.
+- `type()` → returns the **type of object** (e.g. int, list, str, etc.)
+
+```python
+a = 10
+print(id(a))     # Unique ID of the object 10
+print(type(a))   # <class 'int'>
+
+
+## 🔁 Mutable objects
+
+In Python, some objects can be **modified after creation** — these are called **mutable**. Lists, dictionaries, and sets are typical examples.
+
+```python
+my_list = [1, 2, 3]
+
+print(id(my_list))  # Before modification
+
+my_list.append(4)
+
+print(id(my_list))  # Same ID → object was modified
+
+
+## 🔒 Immutable objects
+
+Immutable objects **cannot be changed** after creation. Examples include integers, floats, strings, and tuples.
+
+```python
+x = "hello"
+print(id(x))     # ID before modification
+
+x += " world"     # This creates a new object!
+print(id(x))     # New ID → object was not modified but replaced
+
+eof
