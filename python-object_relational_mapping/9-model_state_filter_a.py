@@ -28,8 +28,8 @@ def main():
     session = Session()
 
     states = (session.query(State)
-                    .filter(State.name.contains('a'))
-                    .order_by(State.id))
+              .filter(State.name.contains('a'))
+              .order_by(State.id))
 
     for state in states:
         print(f"{state.id}: {state.name}")
