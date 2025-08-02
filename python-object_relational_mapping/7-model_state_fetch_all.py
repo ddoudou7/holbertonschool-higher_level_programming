@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
 Lists all State objects from the database hbtn_0e_6_usa (SQLAlchemy).
-Usage: ./7-model_state_fetch_all.py <user> <password> <db>
+
+Usage:
+    ./7-model_state_fetch_all.py <mysql_user> <mysql_pwd> <database>
 """
 
 import sys
@@ -11,7 +13,7 @@ from model_state import Base, State
 
 
 def main():
-    """Create session, query all State objects, print them."""
+    """Create a session, query all State objects, print them."""
     if len(sys.argv) != 4:
         sys.exit(1)
 
@@ -20,6 +22,7 @@ def main():
         f"mysql+mysqldb://{user}:{pwd}@localhost:3306/{db}",
         pool_pre_ping=True
     )
+
     Session = sessionmaker(bind=engine)
     session = Session()
 
