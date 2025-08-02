@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""Filter states by user input (exact name match, case-sensitive)."""
+"""Filter states by exact name (case-sensitive) using user input."""
 
 import sys
 import MySQLdb
 
 
 def main():
-    """Connect, query by exact name, print rows."""
+    """Connect, query, print matching rows."""
     if len(sys.argv) != 5:
         sys.exit(1)
 
@@ -17,7 +17,7 @@ def main():
     cur = db.cursor()
     query = (
         "SELECT * FROM states "
-        "WHERE name = '{}' ORDER BY id ASC".format(sys.argv[4])
+        "WHERE BINARY name = '{}' ORDER BY id ASC".format(sys.argv[4])
     )
     cur.execute(query)
     for row in cur.fetchall():
